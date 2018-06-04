@@ -26,11 +26,12 @@ if(!file.exists(filePath)) {
 if(!file.exists("./figure")){
         dir.create("./figure")
 }
-        
 
 data <- read.csv(filePath, 
                  header = TRUE)
 data$date <- as.Date(data$date, "%Y-%m-%d")
+
+## Select data without missing values
 completeData <- data[complete.cases(data), ]
 ```
 
@@ -79,6 +80,7 @@ lines(meanStepsPerInterval$interval, meanStepsPerInterval$steps, type = "l")
 ![](./figure/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
+## Determine the interval with the most steps taken
 intervalWithMostSteps <- meanStepsPerInterval[which.max(meanStepsPerInterval$steps), 1]
 ```
 
@@ -152,7 +154,7 @@ g + geom_line() +
 
 ![](./figure/unnamed-chunk-4-1.png)<!-- -->
 
-It appears the individual takes more steps throughout the day on weekends, but takes the most steps during the morning on weekdays.
+It appears the individual takes more steps throughout the day on weekends, but takes the most steps per interval during the morning (7:30-9:30am) on weekdays.
 
 
 
